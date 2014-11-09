@@ -1,0 +1,16 @@
+podatki <- read.csv("data.txt", sep=";", na.strings="?")
+novi_podatki = podatki[podatki$Date=="1/2/2007" | podatki$Date=="2/2/2007",]
+png(file = "plot4.png")
+par(mfrow=c(2,2))
+plot(novi_podatki$Global_active_power, xaxt = "n", main = "", xlab="", ylab= "Global Active Power (kilowatts)", type="l")
+axis(1, at=c(0, 1440, 2880), labels=c("Thu", "Fri", "Sat"))
+plot(novi_podatki$Voltage, xaxt = "n", main = "", xlab="datetime", ylab= "Voltage", type="l")
+axis(1, at=c(0, 1440, 2880), labels=c("Thu", "Fri", "Sat"))
+plot(novi_podatki$Sub_metering_1, xaxt = "n", main = "", xlab="", ylab= "Energy sub Metering", type="l")
+points(novi_podatki$Sub_metering_2, col="red", type="l")
+points(novi_podatki$Sub_metering_3, col="blue", type="l")
+axis(1, at=c(0, 1440, 2880), labels=c("Thu", "Fri", "Sat"), legend("topright", legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"),lwd=c(2.5,2.5), col=c("black", "red", "blue")))
+plot(novi_podatki$Global_reactive_power, xaxt = "n", main = "", xlab="datetime", ylab= "Global_reative_power", type="l")
+axis(1, at=c(0, 1440, 2880), labels=c("Thu", "Fri", "Sat"))
+dev.off()
+
